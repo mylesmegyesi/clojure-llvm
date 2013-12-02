@@ -1,4 +1,4 @@
-# tools.compiler.llvm
+# compiler-llvm
 
 A Clojure library designed to ... well, that part is up to you.
 
