@@ -1,7 +1,7 @@
-(ns clojure.llvm.compiler-test
+(ns clojure.llvm.interpreter-test
   (:refer-clojure :exclude [eval])
   (:require [clojure.test :refer :all]
-            [clojure.llvm.compiler :refer [eval]]))
+            [clojure.llvm.interpreter :refer [eval]]))
 
 (def empty-env
   {:context :expr
