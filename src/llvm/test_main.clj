@@ -1,12 +1,5 @@
 (ns llvm.test-main
-  (:import jnr.ffi.LibraryLoader llvm.LLVMWrapper))
-
-(def llvm-library
-  (delay
-    (-> llvm.LLVMWrapper
-      LibraryLoader/create
-      (.search "llvm")
-      (.load "LLVM-3.2"))))
+  (:require [llvm.library :refer [llvm-library]]))
 
 (defn -main [& args]
   (let [context-ref (.LLVMGetGlobalContext @llvm-library)
