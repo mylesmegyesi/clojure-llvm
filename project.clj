@@ -6,11 +6,15 @@
 
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.reader "0.8.0"]
-                 [org.clojure/tools.analyzer "0.0.1-SNAPSHOT"]]
+                 [org.clojure/tools.analyzer "0.0.1-SNAPSHOT"]
+
+                 [com.github.jnr/jnr-ffi "1.0.4"]]
 
   :profiles {:dev {:dependencies [[com.aphyr/prism "0.1.1"]]
                    :plugins [[com.aphyr/prism "0.1.1"]]}}
 
   :java-source-paths ["src"]
+
+  :main llvm.test-main
 
   )
