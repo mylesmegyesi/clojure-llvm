@@ -28,4 +28,8 @@ public interface LLVMWrapper {
 
   public void LLVMDumpModule(Pointer M);
 
+  public String LLVMPrintModuleToString(Pointer M);
+
+  public String LLVMPrintValueToString(Pointer Val);
+
 }
