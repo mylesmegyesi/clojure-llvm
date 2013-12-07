@@ -17,6 +17,7 @@
           one-plus-one  (const-add one one)
           ret           (build-ret builder one-plus-one)]
       (dump-module module)
-      (is (= ""
-            (print-module-to-string module)))
-    )))
+      (is (= "; ModuleID = 'my cool module'\ndefine i32 @0() {\nentry:\n  ret i32 2\n}"
+            (print-module-to-string module)))))
+
+  )

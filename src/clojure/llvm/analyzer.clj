@@ -23,42 +23,12 @@
 (defn desugar-host-expr [form env]
   form)
 
-(defn macroexpand-1 [form env]
-  (if (seq? form)
-    (let [op (first form)]
-      (if (specials op)
-        form
-        (let [v (maybe-var op env)
-              m (meta v)
-              local? (-> env :locals (get op))
-              macro? (and (not local?) (:macro m))
-              inline-arities-f (:inline-arities m)
-              args (rest form)
-              inline? (and (not local?)
-                           (or (not inline-arities-f)
-                               (inline-arities-f (count args)))
-                           (:inline m))]
-          (cond
-
-           macro?
-           (apply v form env (rest form)) ; (m &form &env & args)
-
-           inline?
-           (vary-meta (apply inline? args) merge m)
-
-           :else
-           (desugar-host-expr form env)))))
-    (desugar-host-expr form env)))
+(defn macroexpand-1 [form env] form)
 
 (defn create-var [sym {:keys [ns]}]
-  (intern ns sym))
+  (keyword sym))
 
-(defn analyze
-  "Given an environment, a map containing
-   -  :locals (mapping of names to lexical bindings),
-   -  :context (one of :statement, :expr or :return
- and form, returns an expression object (a map containing at least :form, :op and :env keys)."
-  [form env]
+(defn analyze [form env]
   (binding [ana/macroexpand-1 macroexpand-1
             ana/create-var    create-var
             ana/parse         parse]
@@ -76,7 +46,7 @@
             constant-lift)
 
       (prewalk
-       (comp cleanup2
-          (collect :constants
-                   :callsites
-                   :closed-overs))))))
+        (comp cleanup2
+              (collect :constants
+                       :callsites
+                       :closed-overs))))))
