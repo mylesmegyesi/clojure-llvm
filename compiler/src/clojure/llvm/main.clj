@@ -1,4 +1,7 @@
-(ns clojure.llvm.main)
+(ns clojure.llvm.main
+  (:refer-clojure :exclude [compile])
+  (:require [clojure.llvm.compiler :refer [compile]]
+            [clojure.pprint :refer [pprint]]))
 
 (defn parse-args [args]
   (loop [[current-arg next-arg & more] args results {}]
@@ -23,5 +26,17 @@
                           [:input-filenames]
                           #(conj (vec %) current-arg)))))))
 
+(def empty-env
+  {:context :expr
+   :locals {}
+   :namespaces (atom {})})
+
+(defn compile-input-files [{:keys [input-filenames]}]
+  (for [input-filename input-filenames]
+    (compile (str "(do " (slurp input-filename) ")") empty-env)
+    ))
+
 (defn -main [& args]
-  )
+  (let [options (parse-args args)
+        results (compile-input-files options)]
+    (pprint results)))

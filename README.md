@@ -1,14 +1,9 @@
 # compiler-llvm
 
-A Clojure library designed to ... well, that part is up to you.
+An experiment to compile Clojure using the LLVM.
 
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+```bash
+$ cd compiler
+$ lein run -- -m "clojure.core-test" -o "out" ../stdlib/test/clojure/core_test.clj
+$ ./out
+```
