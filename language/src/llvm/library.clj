@@ -6,4 +6,4 @@
     (-> llvm.LLVMWrapper
       LibraryLoader/create
       (.search "llvm")
-      (.load "LLVM-3.2"))))
+      (.load "LLVM-3.3"))))
