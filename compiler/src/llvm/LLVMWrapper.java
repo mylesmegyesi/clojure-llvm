@@ -14,6 +14,8 @@ public interface LLVMWrapper {
 
   public Pointer LLVMInt32TypeInContext(Pointer p);
 
+  public Pointer LLVMVoidTypeInContext(Pointer p);
+
   public Pointer LLVMAppendBasicBlockInContext(Pointer C, Pointer Fn, String Name);
 
   public Pointer LLVMAddFunction(Pointer M, String Name, Pointer FunctionTy);
@@ -31,5 +33,19 @@ public interface LLVMWrapper {
   public String LLVMPrintModuleToString(Pointer M);
 
   public String LLVMPrintValueToString(Pointer Val);
+
+  public Pointer LLVMBuildCondBr(Pointer builder, Pointer If, Pointer Then, Pointer Else);
+
+  public Pointer LLVMBuildBr(Pointer builder, Pointer Dest);
+
+  public Pointer LLVMGetInsertBlock(Pointer Builder);
+
+  public Pointer LLVMBuildPhi(Pointer Builder, Pointer Ty, String Name);
+
+  public void LLVMAddIncoming(Pointer PhiNode, Pointer[] IncomingValues, Pointer[] IncomingBlocks, long Count);
+
+  public Pointer LLVMBuildCall(Pointer builder, Pointer Fn, Pointer[] Args, long NumArgs, String Name);
+
+  public Pointer LLVMConstICmp(int Predicate, Pointer LHSConstant, Pointer RHSConstant);
 
 }

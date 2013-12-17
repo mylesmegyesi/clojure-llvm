@@ -1,10 +1,7 @@
-(ns clojure.core-test)
+(if (= 4 (+ 1 1))
+  11
+  16)
 
-(defn something []
-
-  (assert (= 2 (+ 1 1)))
-
-  )
-
-(defn -main [& args]
-  (something))
+(if (= 2 (+ 1 1))
+  10
+  15)

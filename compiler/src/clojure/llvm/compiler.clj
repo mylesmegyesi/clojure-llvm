@@ -4,8 +4,8 @@
             [clojure.llvm.analyzer    :refer [analyze]]
             [clojure.llvm.emitter     :refer [emit]]))
 
-(defn compile [string env]
+(defn compile [string env frame]
   (-> string
     read-string
     (analyze env)
-    emit))
+    (emit frame)))
